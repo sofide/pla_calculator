@@ -19,7 +19,7 @@ def calc_pla_in_mts(pla_net_weight, pla_diameter=DIAMETER, pla_density=DENSITY):
     return lenght_mts
 
 
-if __name__ == '__main__':
+def main():
     gross_weight = float(input('Insert filament weight in grams: '))
 
     net_weight = get_pla_net_weight(gross_weight)
@@ -29,3 +29,7 @@ if __name__ == '__main__':
     pla_mts = calc_pla_in_mts(net_weight)
 
     print(f'You have about {pla_mts}m of PLA left')
+
+
+if __name__ == '__main__':
+    main()
