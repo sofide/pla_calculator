@@ -1,0 +1,19 @@
+name: pla_calculator
+summary: A small package to calc how much PLA filament you have left.
+description: |
+      Calc how many meters of filament you have left, based in its weight.
+version: git
+grade: stable
+confinement: devmode
+base: core20
+architectures:
+  - build-on: [arm64, armhf, amd64]
+
+apps:
+  pla_calculator:
+    command: pla_calculator
+
+parts:
+  pla_calculator:
+    plugin: python
+    source: https://github.com/sofide/pla_calculator.git
