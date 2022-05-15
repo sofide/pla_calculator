@@ -3,21 +3,29 @@ import math
 DIAMETER = 0.175  # cm
 DENSITY = 1.25  # g/cm3
 
-FILAMENT_SUP = math.pi * (DIAMETER/2)**2  # cm2
-
 REEL_WEIGHT = 300  # g
 
-weight = float(input('Insert filament weight in grams: '))
 
-pla_weight = weight - REEL_WEIGHT
+def get_pla_net_weight(gross_weight, reel_weight=REEL_WEIGHT):
+    return gross_weight - reel_weight
 
-print(
-    'REEL is usually {}g, so you have {}g of PLA.'.format(
-        REEL_WEIGHT,
-        pla_weight
-    )
-)
 
-lenght = pla_weight / (FILAMENT_SUP * DENSITY)
+def calc_pla_in_mts(pla_net_weight, pla_diameter=DIAMETER, pla_density=DENSITY):
+    filament_area = math.pi * (pla_diameter/2)**2  # cm2
 
-print('You have about {}m of PLA left'.format(round(lenght/100, 2)))
+    lenght_cm = pla_net_weight / (filament_area * pla_density)
+    lenght_mts = round(lenght_cm / 100, 2)
+
+    return lenght_mts
+
+
+if __name__ == '__main__':
+    gross_weight = float(input('Insert filament weight in grams: '))
+
+    net_weight = get_pla_net_weight(gross_weight)
+
+    print(f'REEL is usually {REEL_WEIGHT}g, so you have {net_weight}g of PLA.')
+
+    pla_mts = calc_pla_in_mts(net_weight)
+
+    print(f'You have about {pla_mts}m of PLA left')
